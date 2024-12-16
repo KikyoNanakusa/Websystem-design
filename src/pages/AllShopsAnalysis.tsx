@@ -6,6 +6,11 @@ import LineChart from "../components/atoms/LineChart";
 
 const API_BASE_URL = "http://localhost:4000";
 
+interface ShopSalesData {
+  shopName: string;
+  totalSales: number;
+}
+
 export default function AllShopsAnalyzePage() {
   const [shops, setShops] = useState<string[]>([]);
   const [sales, setSales] = useState<number[]>([]);
@@ -18,9 +23,14 @@ export default function AllShopsAnalyzePage() {
         if (!response.ok) {
           throw new Error(`HTTPエラー: ${response.status}`);
         }
-        const data = await response.json();
-        setShops(data.shops);
-        setSales(data.sales);
+        const data: ShopSalesData[] = await response.json();
+
+        // 店舗名と売上データを抽出
+        const shopNames = data.map((shop) => shop.shopName);
+        const totalSales = data.map((shop) => shop.totalSales);
+
+        setShops(shopNames);
+        setSales(totalSales);
         setLoading(false);
       } catch (error) {
         console.error("全店舗データの取得に失敗しました:", error);
@@ -34,12 +44,8 @@ export default function AllShopsAnalyzePage() {
   }, []);
 
   const generateLineData = () => {
-    const xValues: number[] = [];
-    const yValues: number[] = [];
-    for (let x = 1; x <= 12; x += 0.1) {
-      xValues.push(x);
-      yValues.push(x * 1.3);
-    }
+    const xValues: number[] = sales.map((_, index) => index + 1);
+    const yValues: number[] = sales;
     return { xValues, yValues };
   };
 
@@ -115,7 +121,7 @@ export default function AllShopsAnalyzePage() {
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
           >
-            <LineChart xData={lineData.xValues} yData={lineData.yValues} title="年間の売上" />
+            <LineChart xData={lineData.xValues} yData={lineData.yValues} title="売上の推移" />
           </div>
         </div>
       )}
