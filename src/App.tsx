@@ -1,9 +1,9 @@
-import './App.css'
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import AnalyzeForm from './pages/analyze_form_page'
-import Home from './pages/home'
-import AllStoreAnalyzePage from './pages/all-store-analyze-page'
-import { ShopAAnalysis } from './pages/shop-a-analysis'
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AnalyzeForm from './pages/AnalyzeForm';
+import Home from './pages/home';
+import AllShopsAnalysis from './pages/AllShopsAnalysis';
+import ShopAnalysis from './pages/ShopAnalysis';
 
 function App() {
   return (
@@ -11,11 +11,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/analyze-form" element={<AnalyzeForm />} />
-        <Route path="/all-store-analysis" element={<AllStoreAnalyzePage />} />
-        <Route path="/shop-a-analysis" element={<ShopAAnalysis />} />
+        <Route path="/all-shops-analysis" element={<AllShopsAnalysis />} />
+        <Route path="/shop-analysis" element={<ShopAnalysis />} />
       </Routes>
-    </Router >
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
