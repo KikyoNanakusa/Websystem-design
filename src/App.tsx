@@ -4,6 +4,7 @@ import AnalyzeForm from './pages/AnalyzeForm';
 import Home from './pages/home';
 import AllShopsAnalysis from './pages/AllShopsAnalysis';
 import ShopAnalysis from './pages/ShopAnalysis';
+import LoginPage from './pages/Login';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/analyze-form" element={<AnalyzeForm />} />
         <Route path="/all-shops-analysis" element={<AllShopsAnalysis />} />
         <Route path="/shop-analysis" element={<ShopAnalysis />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   );
